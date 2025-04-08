@@ -5,7 +5,7 @@
 int main(void)
 {
     Stack_t stack;
-    initStack(&stack, INITIAL_CAP);
+    initStack(&stack);
     push(&stack, 3);
     printf("%d\n",peek(&stack));
     push(&stack, 5);

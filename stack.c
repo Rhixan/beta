@@ -3,39 +3,29 @@
 #include <stdbool.h>
 #include "stack.h"
 
-Stack_t* initStack(Stack_t* stack, int capacity)
+bool isEmpty(Stack_t *stack)
 {
-    stack = (Stack_t*)malloc(sizeof(Stack_t));
-    if(stack == NULL)
-    {
-        fprintf(stderr,"Eroare la alocarea dinamica\n");
-        exit(-1);
-    }
-    stack -> date = (Element_t*)(capacity * sizeof(Element_t));
+    return stack -> top == -1;
+}
+
+bool isFull(Stack_t *stack)
+{
+    return stack -> top == MAX_SIZE - 1;
+}
+
+void initStack(Stack_t *stack)
+{
     stack -> top = -1;
-    stack -> capacity = capacity;
-
-    return  stack;
 }
 
-bool isEmpty(Stack_t* stack)
-{
-    return stack->top == -1;
-}
-
-bool isFull(Stack_t* stack)
-{
-    return stack->top == MAX_SIZE - 1;
-}
-
-void push(Stack_t* stack, Element_t e)
+void push(Stack_t *stack, Element_t e)
 {
     if(isFull(stack))
     {
         perror("Stiva e plina\n");
         exit(-1);
     }
-    stack->date[++(stack -> top)] = e;
+    stack -> date[++(stack -> top)] = e;
 }
 
 Element_t pop(Stack_t *stack)
@@ -45,7 +35,7 @@ Element_t pop(Stack_t *stack)
         perror("Stiva e goala\n");
         exit(-1);
     }
-    return stack->date[(stack->top)--];
+    return stack -> date[(stack -> top)--];
 }
 
 Element_t peek(Stack_t *stack)
@@ -55,6 +45,6 @@ Element_t peek(Stack_t *stack)
         perror("Stiva e goala\n");
         exit(-1);
     }
-    return stack->date[(stack->top)];
+    return stack -> date[(stack -> top)];
 }
 
